@@ -1,2 +1,2 @@
-# computacao_grafica
-Projeto prático de Computação Gráfica
+# Computer Graphics
+Pratical project of Computer Graphics class - model a computer
