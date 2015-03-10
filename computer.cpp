@@ -16,13 +16,14 @@ void drawScene(void)
 {
 	// Clear screen and Z-buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
 	// Reset transformations
   	glLoadIdentity();
   	
 	// Rotate when user changes rotate_x and rotate_y
 	glRotatef(rotate_x, 1.0, 0.0, 0.0);
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);
-	
+	glPushMatrix();
 	// FRONT
   	glBegin(GL_POLYGON);
   		glColor3f( 1.0, 0.0, 0.0 );     
@@ -76,7 +77,7 @@ void drawScene(void)
   		glVertex3f( -0.5, -0.5,  0.5 );
   		glVertex3f( -0.5, -0.5, -0.5 );
   	glEnd();
-	
+	glPopMatrix();
 	glFlush();
 	glutSwapBuffers();
 }
@@ -102,6 +103,14 @@ void specialKeys(int key, int x, int y)
 	glutPostRedisplay();
 }
 
+void reshape(int w, int h)
+{
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho( -w/100.0, w/100.0, -h/100.0, h/100.0, -1, 1);
+}
+
 int main(int argc, char* argv[])
 {
 	glutInit(&argc,argv);
@@ -117,7 +126,7 @@ int main(int argc, char* argv[])
 	// Callback functions
 	glutDisplayFunc(drawScene);
 	glutSpecialFunc(specialKeys);
-	
+	glutReshapeFunc(reshape);
 	glutMainLoop();
 	
 	return 0;
