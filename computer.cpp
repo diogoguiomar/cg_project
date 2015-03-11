@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 #ifdef __APPLE__
 #  include <GLUT/glut.h>
@@ -28,7 +29,7 @@ void drawScene(void)
 	// Cor do fundo
 	glClearColor(1.0, 1.0, 1.0, 0.0);
 	
-	// FRONT
+	/*// FRONT
   	glBegin(GL_POLYGON);
   		glColor3f( 0.0, 0.0, 0.0 );     
   		glVertex3f(  1.0, -0.5, -0.5 );      
@@ -125,12 +126,35 @@ void drawScene(void)
   		glVertex3f(  0.25, -0.5, -0.2 );
   		glVertex3f( -0.25, -0.5, -0.2 );
   		glVertex3f( -0.25, -0.7, -0.2 );
+  	glEnd();*/
+  	
+  	double raio = 0.3;
+  	float i, x = 0.0, y = 0.0, PI = 3.14;
+  	
+  	glColor3f( 1.0, 0.0, 0.0 );
+  	glBegin(GL_LINES);
+  	for(i = 0; i < 2*PI; i+=0.01) {
+  		glVertex3f(0, 0, 0);
+  		glVertex3f(x + raio*cos(i),  y + raio*sin(i), 0.0);
+  		
+  	}
+  	for(i = 0; i < 2*PI; i+=0.01) {
+  		glVertex3f(x + raio*cos(i),  y + raio*sin(i), raio);
+  		
+  	}
+  	glEnd();
+  	
+  	glColor3f( 1.0, 0.0, 0.0 );
+  	glBegin(GL_LINES);
+  		for(i = 0; i < 2*PI; i+=0.001) {
+  			glVertex3f(x + raio*cos(i),  y + raio*sin(i), 0.0);
+  			glVertex3f(x + raio*cos(i),  y + raio*sin(i), raio);
+  		}  		
   	glEnd();
   	
 	glPopMatrix();
 	glFlush();
 	glutSwapBuffers();
-	
 }
 
 // Callback routine key entry.
@@ -159,7 +183,7 @@ void reshape(int w, int h)
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho( -w/100.0, w/100.0, -h/100.0, h/100.0, -1, 1);
+    glOrtho( -w/200.0, w/200.0, -h/200.0, h/200.0, -5, 5);
 }
 
 int main(int argc, char* argv[])
