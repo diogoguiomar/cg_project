@@ -24,62 +24,113 @@ void drawScene(void)
 	glRotatef(rotate_x, 1.0, 0.0, 0.0);
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);
 	glPushMatrix();
+	
+	// Cor do fundo
+	glClearColor(1.0, 1.0, 1.0, 0.0);
+	
 	// FRONT
   	glBegin(GL_POLYGON);
-  		glColor3f( 1.0, 0.0, 0.0 );     
-  		glVertex3f(  0.5, -0.5, -0.5 );      
-  		glVertex3f(  0.5,  0.5, -0.5 );    
-  		glVertex3f( -0.5,  0.5, -0.5 );      
-  	    glVertex3f( -0.5, -0.5, -0.5 );    
+  		glColor3f( 0.0, 0.0, 0.0 );     
+  		glVertex3f(  1.0, -0.5, -0.5 );      
+  		glVertex3f(  1.0,  0.5, -0.5 );    
+  		glVertex3f( -1.0,  0.5, -0.5 );      
+  	    glVertex3f( -1.0, -0.5, -0.5 );    
   	glEnd();
- 
+  	
+  	// ECRA VIDRO?
+   	glBegin(GL_POLYGON);
+  		glColor3f( 0.0, 1.0, 1.0 );     
+  		glVertex3f(  0.9, -0.4, -0.51 );      
+  		glVertex3f(  0.9,  0.4, -0.51 );    
+  		glVertex3f( -0.9,  0.4, -0.51 );      
+  	    glVertex3f( -0.9, -0.4, -0.51 );    
+  	glEnd();
+  	
   	// White side - BACK
   	glBegin(GL_POLYGON);
-  		glColor3f(   1.0,  1.0, 1.0 );
-  		glVertex3f(  0.5, -0.5, 0.5 );
-  		glVertex3f(  0.5,  0.5, 0.5 );
-  		glVertex3f( -0.5,  0.5, 0.5 );
-  		glVertex3f( -0.5, -0.5, 0.5 );
+  		glColor3f( 0.0, 0.0, 0.0 ); 
+  		glVertex3f(  1.0, -0.5, 0.0 );
+  		glVertex3f(  1.0,  0.5, 0.0 );
+  		glVertex3f( -1.0,  0.5, 0.0 );
+  		glVertex3f( -1.0, -0.5, 0.0 );
   	glEnd();
  
   	// Purple side - RIGHT
   	glBegin(GL_POLYGON);
-  		glColor3f(  1.0,  0.0,  1.0 );
-  		glVertex3f( 0.5, -0.5, -0.5 );
-  		glVertex3f( 0.5,  0.5, -0.5 );
-  		glVertex3f( 0.5,  0.5,  0.5 );
-  		glVertex3f( 0.5, -0.5,  0.5 );
+  		glColor3f( 0.0, 0.0, 0.0 ); 
+  		glVertex3f( 1.0, -0.5, -0.5 );
+  		glVertex3f( 1.0,  0.5, -0.5 );
+  		glVertex3f( 1.0,  0.5,  0.0 );
+  		glVertex3f( 1.0, -0.5,  0.0 );
   	glEnd();
  
   	// Green side - LEFT
   	glBegin(GL_POLYGON);
-  		glColor3f(   0.0,  1.0,  0.0 );
-  		glVertex3f( -0.5, -0.5,  0.5 );
-  		glVertex3f( -0.5,  0.5,  0.5 );
-  		glVertex3f( -0.5,  0.5, -0.5 );
-  		glVertex3f( -0.5, -0.5, -0.5 );
+  		glColor3f( 0.0, 0.0, 0.0 ); 
+  		glVertex3f( -1.0, -0.5,  0.0 );
+  		glVertex3f( -1.0,  0.5,  0.0 );
+  		glVertex3f( -1.0,  0.5, -0.5 );
+  		glVertex3f( -1.0, -0.5, -0.5 );
   	glEnd();
  
   	// Blue side - TOP
   	glBegin(GL_POLYGON);
-  		glColor3f(   0.0,  0.0,  1.0 );
-  		glVertex3f(  0.5,  0.5,  0.5 );
-  		glVertex3f(  0.5,  0.5, -0.5 );
-  		glVertex3f( -0.5,  0.5, -0.5 );
-  		glVertex3f( -0.5,  0.5,  0.5 );
+  		glColor3f( 0.0, 0.0, 0.0 ); 
+  		glVertex3f(  1.0,  0.5,  0.0 );
+  		glVertex3f(  1.0,  0.5, -0.5 );
+  		glVertex3f( -1.0,  0.5, -0.5 );
+  		glVertex3f( -1.0,  0.5,  0.0 );
   	glEnd();
  
   	// Red side - BOTTOM
   	glBegin(GL_POLYGON);
-  		glColor3f(   1.0,  0.0,  0.0 );
-  		glVertex3f(  0.5, -0.5, -0.5 );
-  		glVertex3f(  0.5, -0.5,  0.5 );
-  		glVertex3f( -0.5, -0.5,  0.5 );
-  		glVertex3f( -0.5, -0.5, -0.5 );
+  		glColor3f( 0.0, 0.0, 0.0 ); 
+  		glVertex3f(  1.0, -0.5, -0.5 );
+  		glVertex3f(  1.0, -0.5,  0.0 );
+  		glVertex3f( -1.0, -0.5,  0.0 );
+  		glVertex3f( -1.0, -0.5, -0.5 );
   	glEnd();
+  	
+  	// Base - Frente
+    glBegin(GL_POLYGON);
+  		glColor3f( 0.7, 0.7, 0.7 ); 
+  		glVertex3f(  0.25, -0.7, -0.3 );
+  		glVertex3f(  0.25, -0.5, -0.3 );
+  		glVertex3f( -0.25, -0.5, -0.3 );
+  		glVertex3f( -0.25, -0.7, -0.3 );
+  	glEnd();
+  	
+    // Base - Direita
+    glBegin(GL_POLYGON);
+  		glColor3f( 0.7, 0.7, 0.7 );  
+  		glVertex3f(  0.25, -0.7, -0.2 );
+  		glVertex3f(  0.25, -0.5, -0.2 );
+  		glVertex3f(  0.25, -0.5, -0.3 );
+  		glVertex3f(  0.25, -0.7, -0.3 );
+  	glEnd();
+  	
+  	// Base - Esquerda
+    glBegin(GL_POLYGON);
+  		glColor3f( 0.7, 0.7, 0.7 );  
+  		glVertex3f( -0.25, -0.7, -0.2 );
+  		glVertex3f( -0.25, -0.5, -0.2 );
+  		glVertex3f( -0.25, -0.5, -0.3 );
+  		glVertex3f( -0.25, -0.7, -0.3 );
+  	glEnd();
+  	
+  	// Base - Tras
+    glBegin(GL_POLYGON);
+  		glColor3f( 0.7, 0.7, 0.7 );  
+  		glVertex3f(  0.25, -0.7, -0.2 );
+  		glVertex3f(  0.25, -0.5, -0.2 );
+  		glVertex3f( -0.25, -0.5, -0.2 );
+  		glVertex3f( -0.25, -0.7, -0.2 );
+  	glEnd();
+  	
 	glPopMatrix();
 	glFlush();
 	glutSwapBuffers();
+	
 }
 
 // Callback routine key entry.
