@@ -29,7 +29,7 @@ void drawScene(void)
 	// Cor do fundo
 	glClearColor(1.0, 1.0, 1.0, 0.0);
 	
-	/*// FRONT
+	// FRONT
   	glBegin(GL_POLYGON);
   		glColor3f( 0.0, 0.0, 0.0 );     
   		glVertex3f(  1.0, -0.5, -0.5 );      
@@ -126,19 +126,19 @@ void drawScene(void)
   		glVertex3f(  0.25, -0.5, -0.2 );
   		glVertex3f( -0.25, -0.5, -0.2 );
   		glVertex3f( -0.25, -0.7, -0.2 );
-  	glEnd();*/
+  	glEnd();
   	
-  	double raio = 0.3;
+  	/*double raio = 0.3;
   	float i, x = 0.0, y = 0.0, PI = 3.14;
   	
   	glColor3f( 1.0, 0.0, 0.0 );
-  	glBegin(GL_LINES);
-  	for(i = 0; i < 2*PI; i+=0.01) {
+    glBegin(GL_LINES);
+  	for(i = 0; i < 2*PI; i+=0.02) {
   		glVertex3f(0, 0, 0);
   		glVertex3f(x + raio*cos(i),  y + raio*sin(i), 0.0);
   		
   	}
-  	for(i = 0; i < 2*PI; i+=0.01) {
+  	for(i = 0; i < 2*PI; i+=0.02) {
   		glVertex3f(x + raio*cos(i),  y + raio*sin(i), raio);
   		
   	}
@@ -146,11 +146,11 @@ void drawScene(void)
   	
   	glColor3f( 1.0, 0.0, 0.0 );
   	glBegin(GL_LINES);
-  		for(i = 0; i < 2*PI; i+=0.001) {
+  		for(i = 0; i < 2*PI; i+=0.02) {
   			glVertex3f(x + raio*cos(i),  y + raio*sin(i), 0.0);
   			glVertex3f(x + raio*cos(i),  y + raio*sin(i), raio);
   		}  		
-  	glEnd();
+  	glEnd();*/
   	
 	glPopMatrix();
 	glFlush();
@@ -198,7 +198,11 @@ int main(int argc, char* argv[])
 	// Enable Z-buffer depth test
 	glEnable(GL_DEPTH_TEST);
 	
-	// Callback functions
+	// Ativa anti-aliasing
+	glEnable(GL_LINE_SMOOTH);
+	glEnable(GL_POLYGON_SMOOTH);
+	
+	// Callback functions  	
 	glutDisplayFunc(drawScene);
 	glutSpecialFunc(specialKeys);
 	glutReshapeFunc(reshape);
