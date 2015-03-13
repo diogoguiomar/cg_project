@@ -178,16 +178,6 @@ void drawScene(void)
 		glVertex3f(-1.0f, 0.0f, 0.0f); // top left
 		glVertex3f(-1.0f, 0.0f, 1.0f); // bot left
 		glVertex3f( 1.0f, 0.0f, 1.0f); // bot right
-		// right
-		glVertex3f( 1.0f, 0.1f, 0.0f); // top right
-		glVertex3f( 1.0f, 0.1f, 1.0f); // top left
-		glVertex3f( 1.0f, 0.0f, 1.0f); // bot left
-		glVertex3f( 1.0f, 0.0f, 0.0f); // bot right
-		// left
-		glVertex3f(-1.0f, 0.1f, 0.0f); // top right
-		glVertex3f(-1.0f, 0.1f, 1.0f); // top left
-		glVertex3f(-1.0f, 0.0f, 1.0f); // bot left
-		glVertex3f(-1.0f, 0.0f, 0.0f); // bot right
 	glEnd();
 
 	glPopMatrix();
