@@ -28,50 +28,50 @@ void drawScene(void)
 	
 	// Cor do fundo
 	glClearColor(1.0, 1.0, 1.0, 0.0);
-	
-	// FRONT
+	/*
+	// BACK
   	glBegin(GL_POLYGON);
-  		glColor3f( 0.0, 0.0, 0.0 );     
-  		glVertex3f(  1.0, -0.5, -0.5 );      
-  		glVertex3f(  1.0,  0.5, -0.5 );    
-  		glVertex3f( -1.0,  0.5, -0.5 );      
-  	    glVertex3f( -1.0, -0.5, -0.5 );    
+  		glColor3f(  0.0,  0.0,  0.0 );     
+  		glVertex3f(  1.0, 0.0, -0.5 );      
+  		glVertex3f(  1.0, 1.0, -0.5 );    
+  		glVertex3f( -1.0, 1.0, -0.5 );      
+  	    glVertex3f( -1.0, 0.0, -0.5 );    
   	glEnd();
   	
   	// ECRA VIDRO?
    	glBegin(GL_POLYGON);
-  		glColor3f( 0.0, 1.0, 1.0 );     
-  		glVertex3f(  0.9, -0.4, -0.51 );      
-  		glVertex3f(  0.9,  0.4, -0.51 );    
-  		glVertex3f( -0.9,  0.4, -0.51 );      
-  	    glVertex3f( -0.9, -0.4, -0.51 );    
+  		glColor3f(  0.0,  1.0,  1.0 );     
+  		glVertex3f(  0.9, 0.1,  0.01 );      
+  		glVertex3f(  0.9, 0.9,  0.01 );    
+  		glVertex3f( -0.9, 0.9,  0.01 );      
+  	    glVertex3f( -0.9, 0.1,  0.01 );    
   	glEnd();
   	
-  	// White side - BACK
+  	// FRONT
   	glBegin(GL_POLYGON);
-  		glColor3f( 0.0, 0.0, 0.0 ); 
-  		glVertex3f(  1.0, -0.5, 0.0 );
-  		glVertex3f(  1.0,  0.5, 0.0 );
-  		glVertex3f( -1.0,  0.5, 0.0 );
-  		glVertex3f( -1.0, -0.5, 0.0 );
+  		glColor3f(  0.0,  0.0,  0.0 );   
+  		glVertex3f(  1.0, 0.0,  0.0 );
+  		glVertex3f(  1.0, 1.0,  0.0 );
+  		glVertex3f( -1.0, 1.0,  0.0 );
+  		glVertex3f( -1.0, 0.0,  0.0 );
   	glEnd();
  
   	// Purple side - RIGHT
   	glBegin(GL_POLYGON);
   		glColor3f( 0.0, 0.0, 0.0 ); 
-  		glVertex3f( 1.0, -0.5, -0.5 );
-  		glVertex3f( 1.0,  0.5, -0.5 );
-  		glVertex3f( 1.0,  0.5,  0.0 );
-  		glVertex3f( 1.0, -0.5,  0.0 );
+  		glVertex3f( 1.0,  0.0, -0.5 );
+  		glVertex3f( 1.0,  1.0, -0.5 );
+  		glVertex3f( 1.0,  1.0,  0.0 );
+  		glVertex3f( 1.0,  0.0,  0.0 );
   	glEnd();
  
   	// Green side - LEFT
   	glBegin(GL_POLYGON);
-  		glColor3f( 0.0, 0.0, 0.0 ); 
-  		glVertex3f( -1.0, -0.5,  0.0 );
-  		glVertex3f( -1.0,  0.5,  0.0 );
-  		glVertex3f( -1.0,  0.5, -0.5 );
-  		glVertex3f( -1.0, -0.5, -0.5 );
+  		glColor3f(  0.0,  0.0, 0.0 ); 
+  		glVertex3f( -1.0, 0.0,  0.0 );
+  		glVertex3f( -1.0, 1.0,  0.0 );
+  		glVertex3f( -1.0, 1.0, -0.5 );
+  		glVertex3f( -1.0, 0.0, -0.5 );
   	glEnd();
  
   	// Blue side - TOP
@@ -86,10 +86,10 @@ void drawScene(void)
   	// Red side - BOTTOM
   	glBegin(GL_POLYGON);
   		glColor3f( 0.0, 0.0, 0.0 ); 
-  		glVertex3f(  1.0, -0.5, -0.5 );
-  		glVertex3f(  1.0, -0.5,  0.0 );
-  		glVertex3f( -1.0, -0.5,  0.0 );
-  		glVertex3f( -1.0, -0.5, -0.5 );
+  		glVertex3f(  1.0,  0.0, -0.5 );
+  		glVertex3f(  1.0,  0.0,  0.0 );
+  		glVertex3f( -1.0,  0.0,  0.0 );
+  		glVertex3f( -1.0,  0.0, -0.5 );
   	glEnd();
   	
   	// Base - Frente
@@ -126,33 +126,50 @@ void drawScene(void)
   		glVertex3f(  0.25, -0.5, -0.2 );
   		glVertex3f( -0.25, -0.5, -0.2 );
   		glVertex3f( -0.25, -0.7, -0.2 );
-  	glEnd();
-  	
-  	/*double raio = 0.3;
-  	float i, x = 0.0, y = 0.0, PI = 3.14;
-  	
-  	glColor3f( 1.0, 0.0, 0.0 );
-    glBegin(GL_LINES);
-  	for(i = 0; i < 2*PI; i+=0.02) {
-  		glVertex3f(0, 0, 0);
-  		glVertex3f(x + raio*cos(i),  y + raio*sin(i), 0.0);
-  		
-  	}
-  	for(i = 0; i < 2*PI; i+=0.02) {
-  		glVertex3f(x + raio*cos(i),  y + raio*sin(i), raio);
-  		
-  	}
-  	glEnd();
-  	
-  	glColor3f( 1.0, 0.0, 0.0 );
-  	glBegin(GL_LINES);
-  		for(i = 0; i < 2*PI; i+=0.02) {
-  			glVertex3f(x + raio*cos(i),  y + raio*sin(i), 0.0);
-  			glVertex3f(x + raio*cos(i),  y + raio*sin(i), raio);
-  		}  		
   	glEnd();*/
   	
-	glLoadIdentity();
+  	
+  	
+  	
+  	#define RAIO_EIXO_X 0.3
+  	#define RAIO_EIXO_Y 0.1
+  	#define ALTURA_BASE 0.1
+  	
+  	float i;
+  	
+  	glColor3f( 1.0, 0.0, 0.0 );
+    /*glBegin(GL_LINES);
+    // Desenha a elipse inferior
+  		for(i = 0; i < 2*M_PI; i+=0.02) {
+  			glVertex3f(0, 0, 0);
+  			glVertex3f(RAIO_EIXO_X * cos(i), 0, RAIO_EIXO_Y * sin(i));
+  		}
+  	// Desenha a elipse superior
+  		for(i = 0; i < 2*M_PI; i+=0.02) {
+  			glVertex3f(0.0, ALTURA_BASE, 0.0);
+  			glVertex3f(RAIO_EIXO_X * cos(i), ALTURA_BASE, RAIO_EIXO_Y * sin(i));
+  		}
+  	glEnd();*/
+	// Desenha o contorno da base
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
+  	glBegin(GL_TRIANGLE_STRIP);
+  		for(i = 0.0; i < 2*M_PI; i+=0.3) {
+  			glVertex3f(RAIO_EIXO_X * cos(i), 0.0, RAIO_EIXO_Y * sin(i));
+  			glVertex3f(RAIO_EIXO_X * cos(i), ALTURA_BASE, RAIO_EIXO_Y * sin(i));
+  		}
+  	glEnd();
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+	/*glLoadIdentity();
 	glRotatef(rotate_x, 1.0, 0.0, 0.0);
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);
 	
@@ -188,7 +205,7 @@ void drawScene(void)
 		glVertex3f(-1.0f, 0.1f, 1.0f); // top left
 		glVertex3f(-1.0f, 0.0f, 1.0f); // bot left
 		glVertex3f(-1.0f, 0.0f, 0.0f); // bot right
-	glEnd();
+	glEnd();*/
 
 	glPopMatrix();
 	glFlush();
