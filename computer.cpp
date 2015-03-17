@@ -169,54 +169,115 @@ void drawScene(void)
   		}
   	glEnd();
   	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-	/*glLoadIdentity();
+  	/* TECLADO */
+	glLoadIdentity();
 	glRotatef(rotate_x, 1.0, 0.0, 0.0);
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);
-	
+	/* Teclado - base */
 	glBegin(GL_QUADS);
-		glColor3f(0.0f,1.0f,0.0f);
+		glColor3f(0.8f,0.8f,0.8f);
 		// front
-		glVertex3f( 1.0f, 0.1f, 1.0f); // top right
-		glVertex3f(-1.0f, 0.1f, 1.0f); // top left
+		glVertex3f( 0.8f, 0.07f, 1.0f); // top right
+		glVertex3f(-1.0f, 0.07f, 1.0f); // top left
 		glVertex3f(-1.0f, 0.0f, 1.0f); // bot left
-		glVertex3f( 1.0f, 0.0f, 1.0f); // bot right
+		glVertex3f( 0.8f, 0.0f, 1.0f); // bot right
 		// back
-		glVertex3f( 1.0f, 0.1f, 0.0f); // top right
-		glVertex3f(-1.0f, 0.1f, 0.0f); // top left
-		glVertex3f(-1.0f, 0.0f, 0.0f); // bot left
-		glVertex3f( 1.0f, 0.0f, 0.0f); // bot right
+		glVertex3f( 0.8f, 0.07f, 0.4f); // top right
+		glVertex3f(-1.0f, 0.07f, 0.4f); // top left
+		glVertex3f(-1.0f, 0.0f, 0.4f); // bot left
+		glVertex3f( 0.8f, 0.0f, 0.4f); // bot right
 		// top
-		glVertex3f( 1.0f, 0.1f, 0.0f); // top right
-		glVertex3f(-1.0f, 0.1f, 0.0f); // top left
-		glVertex3f(-1.0f, 0.1f, 1.0f); // bot left
-		glVertex3f( 1.0f, 0.1f, 1.0f); // bot right
+		glVertex3f( 0.8f, 0.07f, 0.4f); // top right
+		glVertex3f(-1.0f, 0.07f, 0.4f); // top left
+		glVertex3f(-1.0f, 0.07f, 1.0f); // bot left
+		glVertex3f( 0.8f, 0.07f, 1.0f); // bot right
 		// bot
-		glVertex3f( 1.0f, 0.0f, 0.0f); // top right
-		glVertex3f(-1.0f, 0.0f, 0.0f); // top left
+		glVertex3f( 0.8f, 0.0f, 0.4f); // top right
+		glVertex3f(-1.0f, 0.0f, 0.4f); // top left
 		glVertex3f(-1.0f, 0.0f, 1.0f); // bot left
-		glVertex3f( 1.0f, 0.0f, 1.0f); // bot right
+		glVertex3f( 0.8f, 0.0f, 1.0f); // bot right
 		// right
-		glVertex3f( 1.0f, 0.1f, 0.0f); // top right
-		glVertex3f( 1.0f, 0.1f, 1.0f); // top left
-		glVertex3f( 1.0f, 0.0f, 1.0f); // bot left
-		glVertex3f( 1.0f, 0.0f, 0.0f); // bot right
+		glVertex3f( 0.8f, 0.07f, 0.4f); // top right
+		glVertex3f( 0.8f, 0.07f, 1.0f); // top left
+		glVertex3f( 0.8f, 0.0f, 1.0f); // bot left
+		glVertex3f( 0.8f, 0.0f, 0.4f); // bot right
 		// left
-		glVertex3f(-1.0f, 0.1f, 0.0f); // top right
-		glVertex3f(-1.0f, 0.1f, 1.0f); // top left
+		glVertex3f(-1.0f, 0.07f, 0.4f); // top right
+		glVertex3f(-1.0f, 0.07f, 1.0f); // top left
 		glVertex3f(-1.0f, 0.0f, 1.0f); // bot left
-		glVertex3f(-1.0f, 0.0f, 0.0f); // bot right
-	glEnd();*/
+		glVertex3f(-1.0f, 0.0f, 0.4f); // bot right
+	glEnd();
 
+	/* Teclado - teclas01 */
+	glBegin(GL_QUADS);
+		glColor3f(0.0f,0.0f,0.0f);
+		// front
+		glVertex3f( 0.4f, 0.09f, 0.95f); // top right
+		glVertex3f(-0.95f, 0.09f, 0.95f); // top left
+		glVertex3f(-0.95f, 0.01f, 0.95f); // bot left
+		glVertex3f( 0.4f, 0.01f, 0.95f); // bot right
+		// back
+		glVertex3f( 0.4f, 0.09f, 0.45f); // top right
+		glVertex3f(-0.95f, 0.09f, 0.45f); // top left
+		glVertex3f(-0.95f, 0.01f, 0.45f); // bot left
+		glVertex3f( 0.4f, 0.01f, 0.45f); // bot right
+		// top
+		glVertex3f( 0.4f, 0.09f, 0.45f); // top right
+		glVertex3f(-0.95f, 0.09f, 0.45f); // top left
+		glVertex3f(-0.95f, 0.09f, 0.95f); // bot left
+		glVertex3f( 0.4f, 0.09f, 0.95f); // bot right
+		// bot
+		glVertex3f( 0.4f, 0.01f, 0.45f); // top right
+		glVertex3f(-0.95f, 0.01f, 0.45f); // top left
+		glVertex3f(-0.95f, 0.01f, 0.95f); // bot left
+		glVertex3f( 0.4f, 0.01f, 0.95f); // bot right
+		// right
+		glVertex3f( 0.4f, 0.09f, 0.45f); // top right
+		glVertex3f( 0.4f, 0.09f, 0.95f); // top left
+		glVertex3f( 0.4f, 0.01f, 0.95f); // bot left
+		glVertex3f( 0.4f, 0.01f, 0.45f); // bot right
+		// left
+		glVertex3f(-0.95f, 0.09f, 0.45f); // top right
+		glVertex3f(-0.95f, 0.09f, 0.95f); // top left
+		glVertex3f(-0.95f, 0.01f, 0.95f); // bot left
+		glVertex3f(-0.95f, 0.01f, 0.45f); // bot right
+	glEnd();
+
+	/* Teclado - teclas02 */
+		glBegin(GL_QUADS);
+		glColor3f(0.0f,0.0f,0.0f);
+		// front
+		glVertex3f( 0.75f, 0.09f, 0.95f); // top right
+		glVertex3f( 0.45f, 0.09f, 0.95f); // top left
+		glVertex3f( 0.45f, 0.01f, 0.95f); // bot left
+		glVertex3f( 0.75f, 0.01f, 0.95f); // bot right
+		// back
+		glVertex3f( 0.75f, 0.09f, 0.45f); // top right
+		glVertex3f( 0.45f, 0.09f, 0.45f); // top left
+		glVertex3f( 0.45f, 0.01f, 0.45f); // bot left
+		glVertex3f( 0.75f, 0.01f, 0.45f); // bot right
+		// top
+		glVertex3f( 0.75f, 0.09f, 0.45f); // top right
+		glVertex3f( 0.45f, 0.09f, 0.45f); // top left
+		glVertex3f( 0.45f, 0.09f, 0.95f); // bot left
+		glVertex3f( 0.75f, 0.09f, 0.95f); // bot right
+		// bot
+		glVertex3f( 0.75f, 0.01f, 0.45f); // top right
+		glVertex3f( 0.45f, 0.01f, 0.45f); // top left
+		glVertex3f( 0.45f, 0.01f, 0.95f); // bot left
+		glVertex3f( 0.75f, 0.01f, 0.95f); // bot right
+		// right
+		glVertex3f( 0.75f, 0.09f, 0.5f); // top right
+		glVertex3f( 0.75f, 0.09f, 0.95f); // top left
+		glVertex3f( 0.75f, 0.01f, 0.95f); // bot left
+		glVertex3f( 0.75f, 0.01f, 0.5f); // bot right
+		// left
+		glVertex3f( 0.45f, 0.09f, 0.45f); // top right
+		glVertex3f( 0.45f, 0.09f, 0.95f); // top left
+		glVertex3f( 0.45f, 0.01f, 0.95f); // bot left
+		glVertex3f( 0.45f, 0.01f, 0.45f); // bot right
+	glEnd();
+	
 	glPopMatrix();
 	glFlush();
 	glutSwapBuffers();
