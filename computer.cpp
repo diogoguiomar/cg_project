@@ -7,6 +7,10 @@
 #  include <GL/glut.h>
 #endif
 
+#define RAIO_EIXO_X 0.4
+#define RAIO_EIXO_Y 0.2
+#define ALTURA_BASE 0.1
+
 using namespace std;
 
 double rotate_y = 0; 
@@ -15,6 +19,8 @@ double rotate_x = 0;
 // Drawing routine.
 void drawScene(void)
 {
+	float i;
+	
 	// Clear screen and Z-buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
@@ -136,17 +142,7 @@ void drawScene(void)
   		glVertex3f( -0.25,  0.1, -0.3 );
   		glVertex3f( -0.25,  0.5, -0.3 );
   	glEnd();
-  	
 
-  	
-  	
-  	
-  	
-  	#define RAIO_EIXO_X 0.4
-  	#define RAIO_EIXO_Y 0.2
-  	#define ALTURA_BASE 0.1
-  	
-  	float i;
   	
   	glColor3f( 0.0, 0.0, 0.0 );
     glBegin(GL_LINES);
@@ -169,6 +165,40 @@ void drawScene(void)
   		}
   	glEnd();
   	
+  	/* RATO */
+  	// left
+  	glColor3f( 0.0, 0.0, 0.0 );
+    glBegin(GL_TRIANGLE_STRIP);
+  		for(i = -M_PI/2; i < M_PI/2; i+=0.02) {
+  			glVertex3f(2.0, 0.0, 0.5);
+  			glVertex3f(2.0, 0.2 * cos(i), 0.5 + 0.2 * -sin(i));
+  		}
+  	glEnd();
+  	
+  	// right
+  	glColor3f( 0.0, 0.0, 0.0 );
+    glBegin(GL_TRIANGLE_STRIP);
+  		for(i = -M_PI/2; i < M_PI/2; i+=0.02) {
+  			glVertex3f(2.2, 0.0, 0.5);
+  			glVertex3f(2.2, 0.2 * cos(i), 0.5 + 0.2 * -sin(i));
+  		}
+  	glEnd();
+  	
+  	// top
+  	glBegin(GL_TRIANGLE_STRIP);
+  		for(i = -M_PI/2; i < M_PI/2; i+=0.2) {
+  			glVertex3f(2.0, 0.2 * cos(i), 0.5+0.2 * -sin(i));
+  			glVertex3f(2.2, 0.2 * cos(i), 0.5+0.2 * -sin(i));
+  		}
+  	glEnd();
+  	// base
+  	/*glBegin(GL_QUADS);
+		glVertex3f( 2.2f, 0.00f, 0.5f); // top right
+		glVertex3f( 2.0f, 0.00f, 0.5f); // top left
+		glVertex3f( 2.0f, 0.00f, 1.0f); // bot left
+		glVertex3f( 2.2f, 0.00f, 1.0f); // bot right
+	glEnd();*/
+	
   	/* TECLADO */
 	glLoadIdentity();
 	glRotatef(rotate_x, 1.0, 0.0, 0.0);
