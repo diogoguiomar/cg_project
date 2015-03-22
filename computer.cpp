@@ -10,6 +10,8 @@
 #define RAIO_EIXO_X 0.4
 #define RAIO_EIXO_Y 0.2
 #define ALTURA_BASE 0.1
+#define RAIO_LED 0.02
+#define RAIO_POWER 0.04
 // ASCII da tecla escape
 #define ESC 27
 
@@ -42,6 +44,99 @@ void drawScene(void)
 	// Ajusta a escala
 	glScalef(zoom, zoom, zoom);
 	
+	
+	
+	// Caixa - Tras
+  	glBegin(GL_POLYGON);
+  		glColor3f( 0.7, 0.7, 0.7 );    
+  		glVertex3f(  0.7, 0.3, -1.0 );      
+  		glVertex3f(  0.7, 0.6, -1.0 );    
+  		glVertex3f( -0.7, 0.6, -1.0 );      
+  	    glVertex3f( -0.7, 0.3, -1.0 );    
+  	glEnd();
+  	
+  	// Caixa - Frente
+  	glBegin(GL_POLYGON);
+  		glColor3f( 0.7, 0.7, 0.7 );  
+  		glVertex3f(  0.7, 0.3,  0.0 );
+  		glVertex3f(  0.7, 0.6,  0.0 );
+  		glVertex3f( -0.7, 0.6,  0.0 );
+  		glVertex3f( -0.7, 0.3,  0.0 );
+  	glEnd();
+  	
+  	// Caixa - Drive
+  	glBegin(GL_POLYGON);
+  		glColor3f( 0.0, 0.0, 0.0 );  
+  		glVertex3f(  0.0, 0.4,  0.01 );
+  		glVertex3f(  0.0, 0.5,  0.01 );
+  		glVertex3f( -0.6, 0.5,  0.01 );
+  		glVertex3f( -0.6, 0.4,  0.01 );
+  	glEnd();
+  	  	
+  	// Caixa - Lateral direita
+  	glBegin(GL_POLYGON);
+  		glColor3f( 0.7, 0.7, 0.7 ); 
+  		glVertex3f( 0.7,  0.3, -1.0 );
+  		glVertex3f( 0.7,  0.6, -1.0 );
+  		glVertex3f( 0.7,  0.6,  0.0 );
+  		glVertex3f( 0.7,  0.3,  0.0 );
+  	glEnd();
+ 
+  	// Caixa - Lateral Esquerda
+  	glBegin(GL_POLYGON);
+  		glColor3f( 0.7, 0.7, 0.7 );
+  		glVertex3f( -0.7, 0.3,  0.0 );
+  		glVertex3f( -0.7, 0.6,  0.0 );
+  		glVertex3f( -0.7, 0.6, -1.0 );
+  		glVertex3f( -0.7, 0.3, -1.0 );
+  	glEnd();
+ 
+  	// Caixa - Topo
+  	glBegin(GL_POLYGON);
+  		glColor3f( 0.7, 0.7, 0.7 ); 
+  		glVertex3f(  0.7,  0.6,  0.0 );
+  		glVertex3f(  0.7,  0.6, -1.0 );
+  		glVertex3f( -0.7,  0.6, -1.0 );
+  		glVertex3f( -0.7,  0.6,  0.0 );
+  	glEnd();
+ 
+  	// Caixa - Parte debaixo
+  	glBegin(GL_POLYGON);
+  		glColor3f( 0.7, 0.7, 0.7 ); 
+  		glVertex3f(  0.7,  0.3, -1.0 );
+  		glVertex3f(  0.7,  0.3,  0.0 );
+  		glVertex3f( -0.7,  0.3,  0.0 );
+  		glVertex3f( -0.7,  0.3, -1.0 );
+  	glEnd();
+	
+	// Desenha a led de dados
+	glColor3f( 1.0, 0.5, 0.0 );
+    glBegin(GL_LINES);
+  		for(i = 0; i < 2*M_PI; i+=0.02) {
+  			glVertex3f(0.1, 0.45, 0.01);
+  			glVertex3f(0.1 + RAIO_LED * cos(i), 0.45 + RAIO_LED * sin(i), 0.01);
+  		}
+  	glEnd();
+  	
+	// Desenha a led de power
+	glColor3f( 0.0, 1.0, 0.0 );
+    glBegin(GL_LINES);
+  		for(i = 0; i < 2*M_PI; i+=0.02) {
+  			glVertex3f(0.2, 0.45, 0.01);
+  			glVertex3f(0.2 + RAIO_LED * cos(i), 0.45 + RAIO_LED * sin(i), 0.01);
+  		}
+  	glEnd();
+  	
+  	// Desenha o botao de power
+	glColor3f( 0.0, 0.0, 0.0 );
+    glBegin(GL_LINES);
+  		for(i = 0; i < 2*M_PI; i+=0.02) {
+  			glVertex3f(0.4, 0.45, 0.01);
+  			glVertex3f(0.4 + RAIO_POWER * cos(i), 0.45 + RAIO_POWER * sin(i), 0.01);
+  		}
+  	glEnd();
+	
+	/*
 	// Monitor - Tras
   	glBegin(GL_POLYGON);
   		glColor3f(  0.0,  0.0,  0.0 );     
@@ -170,7 +265,7 @@ void drawScene(void)
   			glVertex3f(RAIO_EIXO_X * cos(i), 0.0, -0.2+RAIO_EIXO_Y * sin(i));
   			glVertex3f(RAIO_EIXO_X * cos(i), ALTURA_BASE, -0.2+RAIO_EIXO_Y * sin(i));
   		}
-  	glEnd();
+  	glEnd();*/
   	
   	/* RATO */
   	// left
@@ -216,7 +311,7 @@ void drawScene(void)
 	
 	
 	/* Teclado - base */
-	glBegin(GL_QUADS);
+	/*glBegin(GL_QUADS);
 		glColor3f(0.8f,0.8f,0.8f);
 		// front
 		glVertex3f( 0.8f, 0.07f, 1.0f); // top right
@@ -248,10 +343,10 @@ void drawScene(void)
 		glVertex3f(-1.0f, 0.07f, 1.0f); // top left
 		glVertex3f(-1.0f, 0.0f, 1.0f); // bot left
 		glVertex3f(-1.0f, 0.0f, 0.4f); // bot right
-	glEnd();
+	glEnd();*/
 
 	/* Teclado - teclas01 */
-	glBegin(GL_QUADS);
+	/*glBegin(GL_QUADS);
 		glColor3f(0.0f,0.0f,0.0f);
 		// front
 		glVertex3f( 0.4f, 0.09f, 0.95f); // top right
@@ -283,10 +378,10 @@ void drawScene(void)
 		glVertex3f(-0.95f, 0.09f, 0.95f); // top left
 		glVertex3f(-0.95f, 0.01f, 0.95f); // bot left
 		glVertex3f(-0.95f, 0.01f, 0.45f); // bot right
-	glEnd();
+	glEnd();*/
 
 	/* Teclado - teclas02 */
-		glBegin(GL_QUADS);
+	/*	glBegin(GL_QUADS);
 		glColor3f(0.0f,0.0f,0.0f);
 		// front
 		glVertex3f( 0.75f, 0.09f, 0.95f); // top right
@@ -318,7 +413,7 @@ void drawScene(void)
 		glVertex3f( 0.45f, 0.09f, 0.95f); // top left
 		glVertex3f( 0.45f, 0.01f, 0.95f); // bot left
 		glVertex3f( 0.45f, 0.01f, 0.45f); // bot right
-	glEnd();
+	glEnd();*/
 	
 	glPopMatrix();
 	glFlush();
