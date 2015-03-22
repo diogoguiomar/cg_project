@@ -10,16 +10,23 @@
 #define RAIO_EIXO_X 0.4
 #define RAIO_EIXO_Y 0.2
 #define ALTURA_BASE 0.1
+// ASCII da tecla escape
+#define ESC 27
 
 using namespace std;
 
 double rotate_y = 0; 
 double rotate_x = 0;
+double zoom = 1;
+
 
 // Drawing routine.
 void drawScene(void)
 {
 	float i;
+	
+	// Cor de fundo
+	glClearColor(1.0, 1.0, 1.0, 0.0);
 	
 	// Clear screen and Z-buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -32,8 +39,8 @@ void drawScene(void)
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);
 	glPushMatrix();
 	
-	// Cor do fundo
-	glClearColor(1.0, 1.0, 1.0, 0.0);
+	// Ajusta a escala
+	glScalef(zoom, zoom, zoom);
 	
 	// Monitor - Tras
   	glBegin(GL_POLYGON);
@@ -191,6 +198,7 @@ void drawScene(void)
   			glVertex3f(2.2, 0.2 * cos(i), 0.5+0.2 * -sin(i));
   		}
   	glEnd();
+  	
   	// base
   	/*glBegin(GL_QUADS);
 		glVertex3f( 2.2f, 0.00f, 0.5f); // top right
@@ -200,9 +208,13 @@ void drawScene(void)
 	glEnd();*/
 	
   	/* TECLADO */
-	glLoadIdentity();
-	glRotatef(rotate_x, 1.0, 0.0, 0.0);
-	glRotatef(rotate_y, 0.0, 1.0, 0.0);
+  	
+  	// precisas destas 3 linhas?acho que finciona sem isto?
+	//glLoadIdentity();
+	//glRotatef(rotate_x, 1.0, 0.0, 0.0);
+	//glRotatef(rotate_y, 0.0, 1.0, 0.0);
+	
+	
 	/* Teclado - base */
 	glBegin(GL_QUADS);
 		glColor3f(0.8f,0.8f,0.8f);
@@ -334,6 +346,22 @@ void specialKeys(int key, int x, int y)
 	glutPostRedisplay();
 }
 
+void normalKeys (unsigned char key, int x, int y) 
+{
+	// Faz zoom in
+	if (key == '+')
+		zoom += 0.05;
+	// Faz zoom out
+    else if (key == '-' && zoom > 0)
+    	zoom -= 0.05;
+    // Fecha a aplicacao	-> esta a dar erro de segmentacao
+    else if (key == ESC)
+		exit(0);
+		
+	// Request display update	
+	glutPostRedisplay();
+}
+
 void reshape(int w, int h)
 {
     glViewport(0, 0, w, h);
@@ -342,24 +370,50 @@ void reshape(int w, int h)
     glOrtho( -w/200.0, w/200.0, -h/200.0, h/200.0, -5, 5);
 }
 
+void poligonModeMenu(int option)
+{
+	// Visualizacao de arames
+	if (option == 1) { 
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
+		glutPostRedisplay();
+	}
+	// Viuzalizacao normal
+	else if (option == 2) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glutPostRedisplay();
+	}
+}
+
+void createMenu ()
+{
+	glutCreateMenu(poligonModeMenu);
+	glutAddMenuEntry("Wired", 1);
+	glutAddMenuEntry("Filled", 2);
+
+	// Menu associado ao botao direito do rato
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
 int main(int argc, char* argv[])
 {
 	glutInit(&argc,argv);
 	// Request double buffered true color window with Z-buffer
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	
+	
 	// Create window
-	glutCreateWindow("Test version");
+	glutCreateWindow("Projeto de CG");
 	
 	// Enable Z-buffer depth test
 	glEnable(GL_DEPTH_TEST);
 	
-	// Ativa o modo de arames
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
+	// Cria o menu
+	createMenu();
 	
 	// Callback functions  	
 	glutDisplayFunc(drawScene);
 	glutSpecialFunc(specialKeys);
+	glutKeyboardFunc(normalKeys);
 	glutReshapeFunc(reshape);
 	glutMainLoop();
 	
