@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include "teclado.h"
 
 #ifdef __APPLE__
 #  include <GLUT/glut.h>
@@ -20,7 +21,6 @@ using namespace std;
 double rotate_y = 0; 
 double rotate_x = 0;
 double zoom = 1;
-
 
 // Drawing routine.
 void drawScene(void)
@@ -136,7 +136,7 @@ void drawScene(void)
   		}
   	glEnd();
 	
-	/*
+	
 	// Monitor - Tras
   	glBegin(GL_POLYGON);
   		glColor3f(  0.0,  0.0,  0.0 );     
@@ -265,7 +265,7 @@ void drawScene(void)
   			glVertex3f(RAIO_EIXO_X * cos(i), 0.0, -0.2+RAIO_EIXO_Y * sin(i));
   			glVertex3f(RAIO_EIXO_X * cos(i), ALTURA_BASE, -0.2+RAIO_EIXO_Y * sin(i));
   		}
-  	glEnd();*/
+  	glEnd();
   	
   	/* RATO */
   	// left
@@ -295,12 +295,12 @@ void drawScene(void)
   	glEnd();
   	
   	// base
-  	/*glBegin(GL_QUADS);
-		glVertex3f( 2.2f, 0.00f, 0.5f); // top right
-		glVertex3f( 2.0f, 0.00f, 0.5f); // top left
-		glVertex3f( 2.0f, 0.00f, 1.0f); // bot left
-		glVertex3f( 2.2f, 0.00f, 1.0f); // bot right
-	glEnd();*/
+  	glBegin(GL_QUADS);
+		glVertex3f( 2.2f, 0.00f, 0.3f); // top right
+		glVertex3f( 2.0f, 0.00f, 0.3f); // top left
+		glVertex3f( 2.0f, 0.00f, 0.7f); // bot left
+		glVertex3f( 2.2f, 0.00f, 0.7f); // bot right
+	glEnd();
 	
   	/* TECLADO */
   	
@@ -308,6 +308,15 @@ void drawScene(void)
 	//glLoadIdentity();
 	//glRotatef(rotate_x, 1.0, 0.0, 0.0);
 	//glRotatef(rotate_y, 0.0, 1.0, 0.0);
+	
+	int k;
+	
+	glBegin(GL_QUADS);
+	glColor3f(0.8f,0.8f,0.8f);
+	for (k = 0; k < 23; ++k) {
+		glVertex3fv(vertices[k%23]);
+	}
+	glEnd();
 	
 	
 	/* Teclado - base */
@@ -346,7 +355,7 @@ void drawScene(void)
 	glEnd();*/
 
 	/* Teclado - teclas01 */
-	/*glBegin(GL_QUADS);
+	glBegin(GL_QUADS);
 		glColor3f(0.0f,0.0f,0.0f);
 		// front
 		glVertex3f( 0.4f, 0.09f, 0.95f); // top right
@@ -378,10 +387,10 @@ void drawScene(void)
 		glVertex3f(-0.95f, 0.09f, 0.95f); // top left
 		glVertex3f(-0.95f, 0.01f, 0.95f); // bot left
 		glVertex3f(-0.95f, 0.01f, 0.45f); // bot right
-	glEnd();*/
+	glEnd();
 
 	/* Teclado - teclas02 */
-	/*	glBegin(GL_QUADS);
+	glBegin(GL_QUADS);
 		glColor3f(0.0f,0.0f,0.0f);
 		// front
 		glVertex3f( 0.75f, 0.09f, 0.95f); // top right
@@ -413,7 +422,7 @@ void drawScene(void)
 		glVertex3f( 0.45f, 0.09f, 0.95f); // top left
 		glVertex3f( 0.45f, 0.01f, 0.95f); // bot left
 		glVertex3f( 0.45f, 0.01f, 0.45f); // bot right
-	glEnd();*/
+	glEnd();
 	
 	glPopMatrix();
 	glFlush();
