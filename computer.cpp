@@ -1,20 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "teclado.h"
-
-#ifdef __APPLE__
-#  include <GLUT/glut.h>
-#else
-#  include <GL/glut.h>
-#endif
-
-#define RAIO_EIXO_X 0.4
-#define RAIO_EIXO_Y 0.2
-#define ALTURA_BASE 0.1
-#define RAIO_LED 0.02
-#define RAIO_POWER 0.04
-// ASCII da tecla escape
-#define ESC 27
+#include "computer.h"
 
 using namespace std;
 
@@ -27,12 +14,10 @@ void drawScene(void)
 {
 	float i;
 	
-	// Cor de fundo
-	glClearColor(1.0, 1.0, 1.0, 0.0);
-	
 	// Clear screen and Z-buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
+	
 	// Reset transformations
   	glLoadIdentity();
   	
@@ -41,10 +26,8 @@ void drawScene(void)
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);
 	glPushMatrix();
 	
-	// Ajusta a escala
-	glScalef(zoom, zoom, zoom);
-	
-	
+	// Scale ajust
+	glScalef(zoom, zoom, zoom);	
 	
 	// Caixa - Tras
   	glBegin(GL_POLYGON);
@@ -452,13 +435,13 @@ void specialKeys(int key, int x, int y)
 
 void normalKeys (unsigned char key, int x, int y) 
 {
-	// Faz zoom in
+	// Zoom in
 	if (key == '+')
 		zoom += 0.05;
-	// Faz zoom out
+	// Zoom Out
     else if (key == '-' && zoom > 0)
     	zoom -= 0.05;
-    // Fecha a aplicacao	-> esta a dar erro de segmentacao
+    // Close program
     else if (key == ESC)
 		exit(0);
 		
@@ -474,28 +457,82 @@ void reshape(int w, int h)
     glOrtho( -w/200.0, w/200.0, -h/200.0, h/200.0, -5, 5);
 }
 
-void poligonModeMenu(int option)
+void viewMenu (int option)
 {
-	// Visualizacao de arames
-	if (option == 1) { 
+	switch (option) {
+		case TOP_VIEW: 
+			rotate_y = 0, rotate_x = 90;
+			break;		
+		case LEFT_SIDE_VIEW:
+			rotate_x = 0, rotate_y = 90;
+			break;			
+		case BEHIND_VIEW:
+			rotate_x = 0, rotate_y = 180;
+			break;
+		case PRESPECTIVE_VIEW:
+			rotate_x = 45, rotate_y = 45;
+			break;		
+	}	
+	glutPostRedisplay();
+}
+
+void polygonModeMenu (int option)
+{
+	// Wired Mode
+	if (option == WIRED_MODE) { 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
-		glutPostRedisplay();
 	}
-	// Viuzalizacao normal
-	else if (option == 2) {
+	// Filled Mode
+	else {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glutPostRedisplay();
 	}
+	glutPostRedisplay();
+}
+
+void mainMenu (int option)
+{
+	if (option == QUIT_OP) exit(0);
 }
 
 void createMenu ()
 {
-	glutCreateMenu(poligonModeMenu);
-	glutAddMenuEntry("Wired", 1);
-	glutAddMenuEntry("Filled", 2);
+	int polygonMenuHandle, viewMenuHandle;
+	
+	// View Menu
+	viewMenuHandle = glutCreateMenu(viewMenu);
+	glutAddMenuEntry("Top View", TOP_VIEW);
+	glutAddMenuEntry("Left Side View", LEFT_SIDE_VIEW);
+	glutAddMenuEntry("Behind View", BEHIND_VIEW);
+	glutAddMenuEntry("Prespective View", PRESPECTIVE_VIEW);
+	
+	// Polygon Mode menu
+	polygonMenuHandle = glutCreateMenu(polygonModeMenu);
+	glutAddMenuEntry("Wired", WIRED_MODE);
+	glutAddMenuEntry("Filled", FILLED_MODE);
 
-	// Menu associado ao botao direito do rato
+	// Main menu
+	glutCreateMenu(mainMenu);
+	glutAddSubMenu("Polygon Mode", polygonMenuHandle);
+	glutAddSubMenu("View", viewMenuHandle);
+	glutAddMenuEntry("Quit", QUIT);
+	
+	// Menu attached on right mouse button
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
+void init () 
+{
+	// Create window with name "CG Project"
+	glutCreateWindow("CG Project");
+	
+	// Enable Z-buffer depth test
+	glEnable(GL_DEPTH_TEST);
+	
+	// Create the menu
+	createMenu();
+	
+	// Background color
+	glClearColor(1.0, 1.0, 1.0, 0.0);
 }
 
 int main(int argc, char* argv[])
@@ -504,16 +541,9 @@ int main(int argc, char* argv[])
 	// Request double buffered true color window with Z-buffer
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	
-	
-	// Create window
-	glutCreateWindow("Projeto de CG");
-	
-	// Enable Z-buffer depth test
-	glEnable(GL_DEPTH_TEST);
-	
-	// Cria o menu
-	createMenu();
-	
+	// Initialization functions
+	init();
+		
 	// Callback functions  	
 	glutDisplayFunc(drawScene);
 	glutSpecialFunc(specialKeys);
