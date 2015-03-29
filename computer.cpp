@@ -491,7 +491,7 @@ void polygonModeMenu (int option)
 
 void mainMenu (int option)
 {
-	if (option == QUIT_OP) exit(0);
+	if (option == QUIT) exit(0);
 }
 
 void createMenu ()

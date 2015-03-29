@@ -9,7 +9,7 @@
 #define ALTURA_BASE 0.1
 #define RAIO_LED 0.02
 #define RAIO_POWER 0.04
-#define QUIT_OP 3
+#define QUIT 3
 #define WIRED_MODE 5
 #define FILLED_MODE 6
 #define TOP_VIEW 7
