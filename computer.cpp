@@ -296,8 +296,8 @@ void drawScene(void)
 	
 	glBegin(GL_QUADS);
 	glColor3f(0.8f,0.8f,0.8f);
-	for (k = 0; k < 23; ++k) {
-		glVertex3fv(vertices[k%23]);
+	for (k = 0; k < 24; ++k) {
+		glVertex3fv(vertices[k%24]);
 	}
 	glEnd();
 	
@@ -433,6 +433,36 @@ void specialKeys(int key, int x, int y)
 	glutPostRedisplay();
 }
 
+void rotate (int initial_y)
+{
+	cout << rotate_y << endl;
+	rotate_y += 5;
+	glutPostRedisplay();
+	if (rotate_y < 360 + initial_y) {
+		glutTimerFunc(40, rotate, initial_y);
+	}
+}
+
+void animation ()
+{
+	// Saves initial y axis position
+	double initial_y = rotate_y;
+	if (rotate_y > 360) {
+		rotate_y -= 360;
+		initial_y = rotate_y;
+	}	
+	rotate(initial_y);
+}
+
+void mouse(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON)
+	{
+		if (state == GLUT_DOWN)
+			animation();
+	}
+}
+
 void normalKeys (unsigned char key, int x, int y) 
 {
 	// Zoom in
@@ -444,7 +474,6 @@ void normalKeys (unsigned char key, int x, int y)
     // Close program
     else if (key == ESC)
 		exit(0);
-		
 	// Request display update	
 	glutPostRedisplay();
 }
@@ -548,6 +577,7 @@ int main(int argc, char* argv[])
 	glutDisplayFunc(drawScene);
 	glutSpecialFunc(specialKeys);
 	glutKeyboardFunc(normalKeys);
+	glutMouseFunc(mouse);
 	glutReshapeFunc(reshape);
 	glutMainLoop();
 	
