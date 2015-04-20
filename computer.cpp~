@@ -2,6 +2,9 @@
 #include <cmath>
 #include <stdio.h>
 #include <stdlib.h>
+#if STUFF_IS_MOVING
+     #include <unistd.h>
+ #endif
 #include "teclado.h"
 #include "computer.h"
 
@@ -60,6 +63,13 @@ GLuint raw_texture_load(const char *filename, int width, int height)
 
 static GLuint texture;
 
+#if STUFF_IS_MOVING
+ void idle()
+ {
+     render();
+     usleep((1 / 50.0) * 1000000);
+ }
+ #endif
  
 // Drawing routine.
 void drawScene(void)
@@ -636,6 +646,9 @@ int main(int argc, char* argv[])
 	glutKeyboardFunc(normalKeys);
 	glutMouseFunc(mouse);
 	glutReshapeFunc(reshape);
+	     #if STUFF_IS_MOVING
+         glutIdleFunc(idle);
+     #endif
 	glutMainLoop();
 	
 	return 0;

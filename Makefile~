@@ -1,0 +1,8 @@
+CFLAGS = -Wall
+LDFLAGS = -lm
+
+computer: computer.cpp
+	g++ $(CFLAGS) computer.cpp -o computer -lGL -lGLU -lglut -lGLEW $(LDFLAGS)
+
+clean:
+	rm computer
