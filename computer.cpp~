@@ -1,11 +1,9 @@
+#include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <cmath>
 #include <stdio.h>
 #include <stdlib.h>
-#if STUFF_IS_MOVING
-     #include <unistd.h>
- #endif
-#include "teclado.h"
 #include "computer.h"
 
 using namespace std;
@@ -14,63 +12,78 @@ double rotate_y = 0;
 double rotate_x = 0;
 double zoom = 1;
 
-GLuint raw_texture_load(const char *filename, int width, int height)
+// Globals.
+static unsigned int texture[2]; // Array of texture indices.
+
+// Struct of bitmap file.
+struct BitMapFile
 {
-     GLuint texture;
-     unsigned char *data;
-     FILE *file;
+   int sizeX;
+   int sizeY;
+   unsigned char *data;
+};
+
+// Routine to read a bitmap file.
+// Works only for uncompressed bmp files of 24-bit color.
+BitMapFile *getBMPData(string filename)
+{
+   BitMapFile *bmp = new BitMapFile;
+   unsigned int size, offset, headerSize;
+  
+   // Read input file name.
+   ifstream infile(filename.c_str(), ios::binary);
  
-     // open texture data
-     file = fopen(filename, "rb");
-     if (file == NULL) return 0;
- 
-     // allocate buffer
-     data = (unsigned char*) malloc(width * height * 4);
- 
-     // read texture data
-     fread(data, width * height * 4, 1, file);
-     fclose(file);
- 
-     // allocate a texture name
-     glGenTextures(1, &texture);
- 
-     // select our current texture
-     glBindTexture(GL_TEXTURE_2D, texture);
- 
-     // select modulate to mix texture with color for shading
-     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
- 
-     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_DECAL);
-     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_DECAL);
- 
-     // when texture area is small, bilinear filter the closest mipmap
-     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-     // when texture area is large, bilinear filter the first mipmap
-     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
- 
-     // texture should tile
-     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
- 
-     // build our texture mipmaps
-     gluBuild2DMipmaps(GL_TEXTURE_2D, 4, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
- 
-     // free buffer
-     free(data);
- 
-     return texture;
+   // Get the starting point of the image data.
+   infile.seekg(10);
+   infile.read((char *) &offset, 4); 
+   
+   // Get the header size of the bitmap.
+   infile.read((char *) &headerSize,4);
+
+   // Get width and height values in the bitmap header.
+   infile.seekg(18);
+   infile.read( (char *) &bmp->sizeX, 4);
+   infile.read( (char *) &bmp->sizeY, 4);
+
+   // Allocate buffer for the image.
+   size = bmp->sizeX * bmp->sizeY * 24;
+   bmp->data = new unsigned char[size];
+
+   // Read bitmap data.
+   infile.seekg(offset);
+   infile.read((char *) bmp->data , size);
+   
+   // Reverse color from bgr to rgb.
+   int temp;
+   for (int i = 0; i < size; i += 3)
+   { 
+      temp = bmp->data[i];
+	  bmp->data[i] = bmp->data[i+2];
+	  bmp->data[i+2] = temp;
+   }
+
+   return bmp;
 }
 
-static GLuint texture;
+// Load external textures.
+void loadExternalTextures()			
+{
+   // Local storage for bmp image data.
+   BitMapFile *image[2];
 
-#if STUFF_IS_MOVING
- void idle()
- {
-     render();
-     usleep((1 / 50.0) * 1000000);
- }
- #endif
- 
+   // Load the textures.
+   image[0] = getBMPData("textures/teclado01.bmp");
+
+   // Bind sky image to texture index[0]
+   glBindTexture(GL_TEXTURE_2D, texture[0]);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[0]->sizeX, image[0]->sizeY, 0, 
+	            GL_RGB, GL_UNSIGNED_BYTE, image[0]->data);				
+}
+
 // Drawing routine.
 void drawScene(void)
 {
@@ -200,16 +213,14 @@ void drawScene(void)
   		glVertex3f( -1.0, 0.3,  0.0 );
   	glEnd();
   	
-  	glBindTexture(GL_TEXTURE_2D, texture);
   	// Monitor - Vidro
    	glBegin(GL_POLYGON);
   		glColor3f(  0.0,  1.3,  1.0 );     
-  		glTexCoord2f(1.0f, 0.0f); glVertex3f(  0.9, 0.4,  0.01 );      
-  		glTexCoord2f(1.0f, 1.0f); glVertex3f(  0.9, 1.2,  0.01 );    
-  		glTexCoord2f(0.0f, 1.0f); glVertex3f( -0.9, 1.2,  0.01 );      
-  	    glTexCoord2f(0.0f, 0.0f); glVertex3f( -0.9, 0.4,  0.01 );    
+  		glVertex3f( -0.9, 0.4,  0.01 );     
+  		glVertex3f(  0.9, 0.4,  0.01 );      
+  		glVertex3f(  0.9, 1.2,  0.01 );      
+  	    glVertex3f( -0.9, 1.2,  0.01 );   
   	glEnd();
-  	glDisable(GL_TEXTURE_2D);
   	
   	// Monitor - Lateral direita
   	glBegin(GL_POLYGON);
@@ -350,24 +361,19 @@ void drawScene(void)
 	glEnd();
 	
   	/* TECLADO */
-  	
-  	// precisas destas 3 linhas?acho que finciona sem isto?
-	//glLoadIdentity();
-	//glRotatef(rotate_x, 1.0, 0.0, 0.0);
-	//glRotatef(rotate_y, 0.0, 1.0, 0.0);
 	
-	int k;
+	/*int k;
 	
 	glBegin(GL_QUADS);
 	glColor3f(0.8f,0.8f,0.8f);
 	for (k = 0; k < 24; ++k) {
 		glVertex3fv(vertices[k%24]);
 	}
-	glEnd();
+	glEnd();*/
 	
 	
 	/* Teclado - base */
-	/*glBegin(GL_QUADS);
+	glBegin(GL_QUADS);
 		glColor3f(0.8f,0.8f,0.8f);
 		// front
 		glVertex3f( 0.8f, 0.07f, 1.0f); // top right
@@ -399,9 +405,10 @@ void drawScene(void)
 		glVertex3f(-1.0f, 0.07f, 1.0f); // top left
 		glVertex3f(-1.0f, 0.0f, 1.0f); // bot left
 		glVertex3f(-1.0f, 0.0f, 0.4f); // bot right
-	glEnd();*/
+	glEnd();
 
 	/* Teclado - teclas01 */
+	glBindTexture(GL_TEXTURE_2D, texture[0]);
 	glBegin(GL_QUADS);
 		glColor3f(0.0f,0.0f,0.0f);
 		// front
@@ -415,10 +422,10 @@ void drawScene(void)
 		glVertex3f(-0.95f, 0.01f, 0.45f); // bot left
 		glVertex3f( 0.4f, 0.01f, 0.45f); // bot right
 		// top
-		glVertex3f( 0.4f, 0.09f, 0.45f); // top right
-		glVertex3f(-0.95f, 0.09f, 0.45f); // top left
-		glVertex3f(-0.95f, 0.09f, 0.95f); // bot left
-		glVertex3f( 0.4f, 0.09f, 0.95f); // bot right
+		glTexCoord2f(0.0, 0.0); glVertex3f(-0.95f, 0.09f, 0.95f); // bot left
+		glTexCoord2f(1.0, 0.0); glVertex3f( 0.4f, 0.09f, 0.95f); // bot right
+		glTexCoord2f(1.0, 1.0); glVertex3f( 0.4f, 0.09f, 0.45f); // top right
+		glTexCoord2f(0.0, 1.0); glVertex3f(-0.95f, 0.09f, 0.45f); // top left
 		// bot
 		glVertex3f( 0.4f, 0.01f, 0.45f); // top right
 		glVertex3f(-0.95f, 0.01f, 0.45f); // top left
@@ -620,15 +627,28 @@ void init ()
 	
 	// Enable Z-buffer depth test
 	glEnable(GL_DEPTH_TEST);
-	
-	glEnable(GL_TEXTURE_2D);			// Enable Texture Mapping
-    texture = raw_texture_load("NeHe.bmp", 200, 256);
     
+    // Create texture index array.
+   glGenTextures(2, texture);
+
+   // Load external textures.
+   loadExternalTextures();
+
+   // Turn on OpenGL texturing.
+   glEnable(GL_TEXTURE_2D); 
+
+   // Specify how texture values combine with current surface color values.
+   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE); 
+   
 	// Create the menu
 	createMenu();
 	
 	// Background color
 	glClearColor(1.0, 1.0, 1.0, 0.0);
+	
+	   // Cull back faces.
+   glEnable(GL_CULL_FACE);
+   glCullFace(GL_BACK);
 }
 
 int main(int argc, char* argv[])
@@ -646,9 +666,6 @@ int main(int argc, char* argv[])
 	glutKeyboardFunc(normalKeys);
 	glutMouseFunc(mouse);
 	glutReshapeFunc(reshape);
-	     #if STUFF_IS_MOVING
-         glutIdleFunc(idle);
-     #endif
 	glutMainLoop();
 	
 	return 0;
