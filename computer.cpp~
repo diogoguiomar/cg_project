@@ -1,7 +1,6 @@
 #include "computer.h"
 #include "textures.h"
 #include "keyboard.h"
-#include "mouse.h"
 
 #ifdef __APPLE__
 #  include <GLUT/glut.h>
