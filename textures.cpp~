@@ -55,6 +55,7 @@ void loadExternalTextures()
    // Load the textures.
    image[0] = getBMPData("textures/teclado01.bmp");
    image[1] = getBMPData("textures/teclado02.bmp");
+   image[2] = getBMPData("textures/teclado01.bmp");
 
    // Teclado - teclas
    glGenTextures(1, &texture[0]);
@@ -74,5 +75,15 @@ void loadExternalTextures()
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[1]->sizeX, image[1]->sizeY, 0, 
-	            GL_RGB, GL_UNSIGNED_BYTE, image[1]->data);			
+	            GL_RGB, GL_UNSIGNED_BYTE, image[1]->data);	
+
+   // Rato - topo
+   glGenTextures(1, &texture[2]);
+   glBindTexture(GL_TEXTURE_2D, texture[2]);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[2]->sizeX, image[2]->sizeY, 0, 
+	            GL_RGB, GL_UNSIGNED_BYTE, image[2]->data);		
 }

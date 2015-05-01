@@ -1,5 +1,5 @@
-#include "computer.h"
 #include <cmath>
+#include "computer.h"
 
 void displayMouse()
 {
@@ -22,10 +22,11 @@ void displayMouse()
   		}
   	glEnd();
   	// top
+  	glBindTexture(GL_TEXTURE_2D, texture[2]);
   	glBegin(GL_TRIANGLE_STRIP);
   		for(i = -M_PI/2; i < M_PI/2; i+=0.2) {
-  			glVertex3f(2.0, 0.2 * cos(i), 0.5+0.2 * -sin(i));
-  			glVertex3f(2.2, 0.2 * cos(i), 0.5+0.2 * -sin(i));
+  			glTexCoord2f(0.1, 0.0); glVertex3f(2.0, 0.2 * cos(i), 0.5+0.2 * -sin(i));
+  			glTexCoord2f(0.0, 1.0); glVertex3f(2.2, 0.2 * cos(i), 0.5+0.2 * -sin(i));
   		}
   	glEnd();
   	// base
