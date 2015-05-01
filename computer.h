@@ -1,7 +1,16 @@
+#ifndef COMPUTER_H
+#define COMPUTER_H
+
+#include <cstdlib>
+#include <iostream>
+#include <fstream>
+
 #ifdef __APPLE__
 #  include <GLUT/glut.h>
+#  include <OpenGL/glext.h>
 #else
 #  include <GL/glut.h>
+#  include <GL/glext.h>
 #endif
 
 #define RAIO_EIXO_X 0.4
@@ -19,3 +28,6 @@
 
 // ASCII da tecla escape
 #define ESC 27
+
+extern unsigned int texture[1];
+#endif

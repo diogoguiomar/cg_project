@@ -1,9 +1,18 @@
-/*#ifdef __APPLE__
+#ifndef TESTE_H
+#define TESTE_H
+
+#include <cstdlib>
+#include <iostream>
+#include <fstream>
+
+#ifdef __APPLE__
 #  include <GLUT/glut.h>
+#  include <OpenGL/glext.h>
 #else
 #  include <GL/glut.h>
+#  include <GL/glext.h>
 #endif
-*/
+
 #define RAIO_EIXO_X 0.4
 #define RAIO_EIXO_Y 0.2
 #define ALTURA_BASE 0.1
@@ -19,3 +28,6 @@
 
 // ASCII da tecla escape
 #define ESC 27
+
+extern unsigned int texture[1];
+#endif
