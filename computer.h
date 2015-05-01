@@ -28,6 +28,7 @@
 
 // ASCII da tecla escape
 #define ESC 27
+#define NUM_TEX 2
 
-extern unsigned int texture[1];
+extern unsigned int texture[NUM_TEX];
 #endif

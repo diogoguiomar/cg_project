@@ -3,7 +3,7 @@
 
 using namespace std;
 
-unsigned int texture[1];
+unsigned int texture[NUM_TEX];
 
 // Routine to read a bitmap file.
 // Works only for uncompressed bmp files of 24-bit color.
@@ -50,12 +50,13 @@ BitMapFile *getBMPData(string filename)
 void loadExternalTextures()			
 {
    // Local storage for bmp image data.
-   BitMapFile *image[1];
+   BitMapFile *image[NUM_TEX];
 
    // Load the textures.
    image[0] = getBMPData("textures/teclado01.bmp");
+   image[1] = getBMPData("textures/teclado02.bmp");
 
-   // Bind sky image to texture index[0]
+   // Teclado - teclas
    glGenTextures(1, &texture[0]);
    glBindTexture(GL_TEXTURE_2D, texture[0]);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
@@ -63,5 +64,15 @@ void loadExternalTextures()
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[0]->sizeX, image[0]->sizeY, 0, 
-	            GL_RGB, GL_UNSIGNED_BYTE, image[0]->data);				
+	            GL_RGB, GL_UNSIGNED_BYTE, image[0]->data);		
+
+   // Teclado - base
+   glGenTextures(1, &texture[1]);
+   glBindTexture(GL_TEXTURE_2D, texture[1]);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[1]->sizeX, image[1]->sizeY, 0, 
+	            GL_RGB, GL_UNSIGNED_BYTE, image[1]->data);			
 }
