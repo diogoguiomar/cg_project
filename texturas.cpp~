@@ -1,4 +1,4 @@
-#include "teste.h"
+#include "computer.h"
 #include "texturas.h"
 
 using namespace std;

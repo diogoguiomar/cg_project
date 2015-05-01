@@ -1,8 +1,8 @@
 CFLAGS = -Wall
 LDFLAGS = -lm
 
-teste: teste.cpp texturas.cpp teclado.cpp
-	g++ $(CFLAGS) -o teste teste.cpp texturas.cpp teclado.cpp -lGL -lGLU -lglut $(LDFLAGS)
+computer: computer.cpp texturas.cpp teclado.cpp
+	g++ $(CFLAGS) -o computer computer.cpp texturas.cpp teclado.cpp -lGL -lGLU -lglut $(LDFLAGS)
 
 clean:
-	rm teste
+	rm computer

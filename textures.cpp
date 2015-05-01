@@ -1,5 +1,5 @@
 #include "computer.h"
-#include "texturas.h"
+#include "textures.h"
 
 using namespace std;
 

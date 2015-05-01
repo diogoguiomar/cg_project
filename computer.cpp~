@@ -1,6 +1,6 @@
 #include "computer.h"
 #include "texturas.h"
-#include "teclado.h"
+#include "keyboard.h"
 
 #ifdef __APPLE__
 #  include <GLUT/glut.h>
@@ -15,8 +15,6 @@
 double rotate_y = 0; 
 double rotate_x = 0;
 double zoom = 1;
-
-
 
 void display()
 {
