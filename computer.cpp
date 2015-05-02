@@ -2,6 +2,8 @@
 #include "textures.h"
 #include "keyboard.h"
 #include "mouse.h"
+#include "tower.h"
+#include "menu.h"
 
 #ifdef __APPLE__
 #  include <GLUT/glut.h>
@@ -28,77 +30,16 @@ void display()
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);
 	glScalef(zoom, zoom, zoom);	
 	
+	
 	displayKeyboard();
 	displayMouse();
+	displayTower();
 	
 	glutSwapBuffers();
 }
 
-void mainMenu(int option)
-{
-	if (option == QUIT) exit(0);
-}
-
-void viewMenu(int option)
-{
-	switch (option) {
-		case TOP_VIEW: 
-			rotate_y = 0, rotate_x = 90;
-			break;		
-		case LEFT_SIDE_VIEW:
-			rotate_x = 0, rotate_y = 90;
-			break;			
-		case BEHIND_VIEW:
-			rotate_x = 0, rotate_y = 180;
-			break;
-		case PRESPECTIVE_VIEW:
-			rotate_x = 45, rotate_y = 45;
-			break;		
-	}	
-	glutPostRedisplay();
-}
-
-void polygonModeMenu(int option)
-{
-	// Wired Mode
-	if (option == WIRED_MODE) 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
-	// Filled Mode
-	else 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		
-	glutPostRedisplay();
-}
-
-void createMenu()
-{
-	int polygonMenuHandle, viewMenuHandle;
-	
-	// View Menu
-	viewMenuHandle = glutCreateMenu(viewMenu);
-	glutAddMenuEntry("Top View", TOP_VIEW);
-	glutAddMenuEntry("Left Side View", LEFT_SIDE_VIEW);
-	glutAddMenuEntry("Behind View", BEHIND_VIEW);
-	glutAddMenuEntry("Prespective View", PRESPECTIVE_VIEW);
-	
-	// Polygon Mode menu
-	polygonMenuHandle = glutCreateMenu(polygonModeMenu);
-	glutAddMenuEntry("Wired", WIRED_MODE);
-	glutAddMenuEntry("Filled", FILLED_MODE);
-
-	// Main menu
-	glutCreateMenu(mainMenu);
-	glutAddSubMenu("Polygon Mode", polygonMenuHandle);
-	glutAddSubMenu("View", viewMenuHandle);
-	glutAddMenuEntry("Quit", QUIT);
-	
-	// Menu attached on right mouse button
-	glutAttachMenu(GLUT_RIGHT_BUTTON);
-}
-
 void rotate(int initial_y)
 {
-	cout << rotate_y << endl;
 	rotate_y += 5;
 	glutPostRedisplay();
 	if (rotate_y < 360 + initial_y) {
@@ -158,7 +99,7 @@ void reshape(int w, int h)
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-w/100.0, w/100.0, -h/100.0, h/100.0, -5, 5);
+    glOrtho(-w/100.0, w/100.0, -h/100.0, h/100.0, -10, 10);
 }
 
 void init()
@@ -170,6 +111,7 @@ void init()
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_TEXTURE_2D);
+	createMenu();
 }
 
 int main(int argc, char* argv[])

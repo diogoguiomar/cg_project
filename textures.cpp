@@ -56,6 +56,9 @@ void loadExternalTextures()
    image[0] = getBMPData("textures/teclado01.bmp");
    image[1] = getBMPData("textures/teclado02.bmp");
    image[2] = getBMPData("textures/mouse01.bmp");
+   image[3] = getBMPData("textures/tower-front.bmp");
+   image[4] = getBMPData("textures/tower-back.bmp");
+   image[5] = getBMPData("textures/tower-body.bmp");
 
    // Teclado - teclas
    glGenTextures(1, &texture[0]);
@@ -85,5 +88,35 @@ void loadExternalTextures()
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[2]->sizeX, image[2]->sizeY, 0, 
-	            GL_RGB, GL_UNSIGNED_BYTE, image[2]->data);		
+	            GL_RGB, GL_UNSIGNED_BYTE, image[2]->data);	
+	            
+	// Tower - front
+   glGenTextures(1, &texture[3]);
+   glBindTexture(GL_TEXTURE_2D, texture[3]);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[3]->sizeX, image[3]->sizeY, 0, 
+	            GL_RGB, GL_UNSIGNED_BYTE, image[3]->data);
+	            	
+	// Tower - back
+   glGenTextures(1, &texture[4]);
+   glBindTexture(GL_TEXTURE_2D, texture[4]);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[4]->sizeX, image[4]->sizeY, 0, 
+	            GL_RGB, GL_UNSIGNED_BYTE, image[4]->data);
+	            
+	// Tower - body
+   glGenTextures(1, &texture[5]);
+   glBindTexture(GL_TEXTURE_2D, texture[5]);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[5]->sizeX, image[5]->sizeY, 0, 
+	            GL_RGB, GL_UNSIGNED_BYTE, image[5]->data);
 }
