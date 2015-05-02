@@ -37,7 +37,7 @@ BitMapFile *getBMPData(string filename)
    
    // Reverse color from bgr to rgb.
    int temp;
-   for (int i = 0; i < size; i += 3)
+   for (unsigned int i = 0; i < size; i += 3)
    { 
       temp = bmp->data[i];
 	  bmp->data[i] = bmp->data[i+2];
@@ -59,6 +59,7 @@ void loadExternalTextures()
    image[3] = getBMPData("textures/tower-front.bmp");
    image[4] = getBMPData("textures/tower-back.bmp");
    image[5] = getBMPData("textures/tower-body.bmp");
+   image[6] = getBMPData("textures/screen-front.bmp");
 
    // Teclado - teclas
    glGenTextures(1, &texture[0]);
@@ -119,4 +120,14 @@ void loadExternalTextures()
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[5]->sizeX, image[5]->sizeY, 0, 
 	            GL_RGB, GL_UNSIGNED_BYTE, image[5]->data);
+	            
+	// Sceen - front
+   glGenTextures(1, &texture[6]);
+   glBindTexture(GL_TEXTURE_2D, texture[6]);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[6]->sizeX, image[6]->sizeY, 0, 
+	            GL_RGB, GL_UNSIGNED_BYTE, image[6]->data);
 }
