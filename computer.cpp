@@ -3,6 +3,7 @@
 #include "keyboard.h"
 #include "mouse.h"
 #include "tower.h"
+#include "screen.h"
 #include "menu.h"
 
 #ifdef __APPLE__
@@ -34,6 +35,7 @@ void display()
 	displayKeyboard();
 	displayMouse();
 	displayTower();
+	displayScreen();
 	
 	glutSwapBuffers();
 }
