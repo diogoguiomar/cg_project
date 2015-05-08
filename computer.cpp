@@ -33,8 +33,11 @@ void display()
 	
 	
 	displayKeyboard();
-	
+	// correcao da posicao do rato
+	glPushMatrix();
+	glTranslatef(-1.0f, 0.0f, 0.0f);
 	displayMouse();
+	glPopMatrix();
 	
 	displayTower();
 	displayScreen();
