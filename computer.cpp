@@ -33,7 +33,9 @@ void display()
 	
 	
 	displayKeyboard();
+	
 	displayMouse();
+	
 	displayTower();
 	displayScreen();
 	

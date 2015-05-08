@@ -8,29 +8,29 @@ void displayKeyboard()
 		glColor3f(0.8f,0.8f,0.8f);
 		// front
 		glTexCoord2f(0.0, 0.0); glVertex3f(-1.0f, 0.0f, 1.0f); // bot left
-		glTexCoord2f(1.0, 0.0); glVertex3f( 0.8f, 0.0f, 1.0f); // bot right
-		glTexCoord2f(1.0, 1.0); glVertex3f( 0.8f, 0.07f, 1.0f); // top right
+		glTexCoord2f(1.0, 0.0); glVertex3f( 0.45f, 0.0f, 1.0f); // bot right
+		glTexCoord2f(1.0, 1.0); glVertex3f( 0.45f, 0.07f, 1.0f); // top right
 		glTexCoord2f(0.0, 1.0); glVertex3f(-1.0f, 0.07f, 1.0f); // top left
 		// back
 		glTexCoord2f(0.0, 0.0); glVertex3f(-1.0f, 0.0f, 0.4f); // bot left
-		glTexCoord2f(1.0, 0.0); glVertex3f( 0.8f, 0.0f, 0.4f); // bot right
-		glTexCoord2f(1.0, 1.0); glVertex3f( 0.8f, 0.07f, 0.4f); // top right
+		glTexCoord2f(1.0, 0.0); glVertex3f( 0.45f, 0.0f, 0.4f); // bot right
+		glTexCoord2f(1.0, 1.0); glVertex3f( 0.45f, 0.07f, 0.4f); // top right
 		glTexCoord2f(0.0, 1.0); glVertex3f(-1.0f, 0.07f, 0.4f); // top left
 		// top
 		glTexCoord2f(0.0, 0.0); glVertex3f(-1.0f, 0.07f, 1.0f); // bot left
-		glTexCoord2f(1.0, 0.0); glVertex3f( 0.8f, 0.07f, 1.0f); // bot right
-		glTexCoord2f(1.0, 1.0); glVertex3f( 0.8f, 0.07f, 0.4f); // top right
+		glTexCoord2f(1.0, 0.0); glVertex3f( 0.45f, 0.07f, 1.0f); // bot right
+		glTexCoord2f(1.0, 1.0); glVertex3f( 0.45f, 0.07f, 0.4f); // top right
 		glTexCoord2f(0.0, 1.0); glVertex3f(-1.0f, 0.07f, 0.4f); // top left
 		// bot
 		glTexCoord2f(0.0, 0.0); glVertex3f(-1.0f, 0.0f, 1.0f); // bot left
-		glTexCoord2f(1.0, 0.0); glVertex3f( 0.8f, 0.0f, 1.0f); // bot right
-		glTexCoord2f(1.0, 1.0); glVertex3f( 0.8f, 0.0f, 0.4f); // top right
+		glTexCoord2f(1.0, 0.0); glVertex3f( 0.45f, 0.0f, 1.0f); // bot right
+		glTexCoord2f(1.0, 1.0); glVertex3f( 0.45f, 0.0f, 0.4f); // top right
 		glTexCoord2f(0.0, 1.0); glVertex3f(-1.0f, 0.0f, 0.4f); // top left	
 		// right
-		glTexCoord2f(0.0, 0.0); glVertex3f( 0.8f, 0.0f, 1.0f); // bot left
-		glTexCoord2f(1.0, 0.0); glVertex3f( 0.8f, 0.0f, 0.4f); // bot right
-		glTexCoord2f(1.0, 1.0); glVertex3f( 0.8f, 0.07f, 0.4f); // top right
-		glTexCoord2f(0.0, 1.0); glVertex3f( 0.8f, 0.07f, 1.0f); // top left	
+		glTexCoord2f(0.0, 0.0); glVertex3f( 0.45f, 0.0f, 1.0f); // bot left
+		glTexCoord2f(1.0, 0.0); glVertex3f( 0.45f, 0.0f, 0.4f); // bot right
+		glTexCoord2f(1.0, 1.0); glVertex3f( 0.45f, 0.07f, 0.4f); // top right
+		glTexCoord2f(0.0, 1.0); glVertex3f( 0.45f, 0.07f, 1.0f); // top left	
 		// left
 		glTexCoord2f(0.0, 0.0); glVertex3f(-1.0f, 0.0f, 1.0f); // bot left
 		glTexCoord2f(1.0, 0.0); glVertex3f(-1.0f, 0.0f, 0.4f); // bot right
