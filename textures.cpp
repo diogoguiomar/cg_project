@@ -55,7 +55,7 @@ void loadExternalTextures()
    // Load the textures.
    image[0] = getBMPData("textures/teclado01.bmp");
    image[1] = getBMPData("textures/teclado02.bmp");
-   image[2] = getBMPData("textures/mouse01.bmp");
+   image[2] = getBMPData("textures/mouse.bmp");
    image[3] = getBMPData("textures/tower-front.bmp");
    image[4] = getBMPData("textures/tower-back.bmp");
    image[5] = getBMPData("textures/tower-body.bmp");

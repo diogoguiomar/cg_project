@@ -22,7 +22,7 @@ void displayMouse()
   		}
   	glEnd();
   	// top
-  	glBindTexture(GL_TEXTURE_2D, texture[2]);
+  	glBindTexture(GL_TEXTURE_2D, texture[1]);
   	glBegin(GL_TRIANGLE_STRIP);
   	float j = 0.066666667;
   	float k = 0;

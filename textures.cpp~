@@ -55,12 +55,13 @@ void loadExternalTextures()
    // Load the textures.
    image[0] = getBMPData("textures/teclado01.bmp");
    image[1] = getBMPData("textures/teclado02.bmp");
-   image[2] = getBMPData("textures/mouse01.bmp");
+   //image[2] = getBMPData("textures/mouse01.bmp");
+   image[2] = getBMPData("textures/mouse.bmp");
    image[3] = getBMPData("textures/tower-front.bmp");
    image[4] = getBMPData("textures/tower-back.bmp");
    image[5] = getBMPData("textures/tower-body.bmp");
    image[6] = getBMPData("textures/screen-front.bmp");
-   image[7] = getBMPData("textures/floor.bmp");
+   image[7] = getBMPData("textures/table.bmp");
 
    // Teclado - teclas
    glGenTextures(1, &texture[0]);
@@ -132,7 +133,7 @@ void loadExternalTextures()
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[6]->sizeX, image[6]->sizeY, 0, 
 	            GL_RGB, GL_UNSIGNED_BYTE, image[6]->data);
 	            
-	// Floor
+	// table
    glGenTextures(1, &texture[7]);
    glBindTexture(GL_TEXTURE_2D, texture[7]);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
