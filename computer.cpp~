@@ -20,13 +20,16 @@
 int light;
 
 /* white ambient light at half intensity (rgba) */
-GLfloat LightAmbient[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+GLfloat LightAmbient[] = { 2.0f, 2.0f, 2.0f, 1.0f };
 
 /* super bright, full intensity diffuse light. */
-GLfloat LightDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+GLfloat LightDiffuse[] = { 4.0f, 4.0f, 4.0f, 4.0f };
+
+/* Second light with less light than first one*/
+GLfloat LightDiffuse2[] = { 0.0f, 0.0f, 0.0f, 0.0f };
 
 /* position of light (x, y, z, (position of light)) */
-GLfloat LightPosition[] = { 0.0f, 0.0f, 4.0f, 1.0f };
+GLfloat LightPosition[] = { 0.0f, 1.0f, 10.0, 1.0f };
 
 double rotate_y = 0; 
 double rotate_x = 0;
@@ -109,12 +112,13 @@ void keyInput(unsigned char key, int x, int y)
     else if (key == ESC)
     	exit(0);
 	else if (key == 'l') {
-		light = light ? 0 : 1;              // switch the current value of light, between 0 and 1.
-		printf("Light is now: %d\n", light);
-		if (!light) {
-	    	glDisable(GL_LIGHTING);
+		light = light ? 0 : 1;
+		if (light) {
+	    	glEnable(GL_LIGHT1);
+	    	glDisable(GL_LIGHT2);
 		} else {
-	    	glEnable(GL_LIGHTING);
+			glDisable(GL_LIGHT1);
+	    	glEnable(GL_LIGHT2);
 		}
 	}
 	glutPostRedisplay();
@@ -133,7 +137,7 @@ void init()
 {
 	loadExternalTextures();	
 	glEnable(GL_TEXTURE_2D);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, /*GL_MODULATE*/ /*GL_REPLACE*/); 
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE); 
 	glClearColor(1.0, 1.0, 1.0, 0.0);
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_SMOOTH);
@@ -144,13 +148,17 @@ void init()
     glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);  // add lighting. (ambient)
     glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);  // add lighting. (diffuse).
     glLightfv(GL_LIGHT1, GL_POSITION,LightPosition); // set light position.
-    glEnable(GL_LIGHT1);                             // turn light 1 on.
+    glLightfv(GL_LIGHT2, GL_AMBIENT, LightAmbient);  // add lighting. (ambient)
+    glLightfv(GL_LIGHT2, GL_DIFFUSE, LightDiffuse2); // add lighting. (diffuse).
+    glLightfv(GL_LIGHT2, GL_POSITION,LightPosition); // set light position.
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT2);                             // turn light 1 on.
 }
 
 int main(int argc, char* argv[])
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH); 
 	glutInitWindowSize(700, 500);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("Computer");
@@ -161,7 +169,6 @@ int main(int argc, char* argv[])
 	glutSpecialFunc(specialKeyInput);
 	init();
 	glutMainLoop();
-	
 	return 0;
 }
 
