@@ -60,6 +60,7 @@ void loadExternalTextures()
    image[4] = getBMPData("textures/tower-back.bmp");
    image[5] = getBMPData("textures/tower-body.bmp");
    image[6] = getBMPData("textures/screen-front.bmp");
+   image[7] = getBMPData("textures/table.bmp");
 
    // Teclado - teclas
    glGenTextures(1, &texture[0]);
@@ -130,4 +131,14 @@ void loadExternalTextures()
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[6]->sizeX, image[6]->sizeY, 0, 
 	            GL_RGB, GL_UNSIGNED_BYTE, image[6]->data);
+	            
+	// table
+   glGenTextures(1, &texture[7]);
+   glBindTexture(GL_TEXTURE_2D, texture[7]);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[7]->sizeX, image[7]->sizeY, 0, 
+	            GL_RGB, GL_UNSIGNED_BYTE, image[7]->data);
 }

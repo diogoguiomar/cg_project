@@ -5,6 +5,7 @@
 #include "tower.h"
 #include "screen.h"
 #include "shadows.h"
+#include "table.h"
 #include "menu.h"
 
 #ifdef __APPLE__
@@ -50,13 +51,14 @@ void display()
 	if(light)
 		displayShadows();
 	
+	
 	displayKeyboard();
 	// correcao da posicao do rato
 	glPushMatrix();
 	glTranslatef(-1.0f, 0.0f, 0.0f);
 	displayMouse();
 	glPopMatrix();
-	
+	drawTable();
 	displayTower();
 	displayScreen();
 	
@@ -155,7 +157,7 @@ void init()
     glLightfv(GL_LIGHT2, GL_DIFFUSE, LightDiffuse2); // add lighting. (diffuse).
     glLightfv(GL_LIGHT2, GL_POSITION,LightPosition); // set light position.
     glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT2);                             // turn light 1 on.
+    glEnable(GL_LIGHT2);                           // turn light 1 on.
 }
 
 int main(int argc, char* argv[])
