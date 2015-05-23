@@ -4,6 +4,7 @@
 #include "mouse.h"
 #include "tower.h"
 #include "screen.h"
+#include "shadows.h"
 #include "menu.h"
 
 #ifdef __APPLE__
@@ -46,6 +47,8 @@ void display()
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);
 	glScalef(zoom, zoom, zoom);	
 	
+	if(light)
+		displayShadows();
 	
 	displayKeyboard();
 	// correcao da posicao do rato
