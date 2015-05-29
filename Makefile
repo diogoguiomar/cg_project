@@ -1,7 +1,7 @@
 CFLAGS = -Wall
 LDFLAGS = -lm
 
-computer: computer.cpp textures.cpp keyboard.cpp mouse.cpp screen.cpp tower.cpp menu.cpp
+computer: computer.cpp textures.cpp keyboard.cpp mouse.cpp screen.cpp tower.cpp menu.cpp shadows.cpp table.cpp
 	g++ $(CFLAGS) -o computer computer.cpp textures.cpp keyboard.cpp mouse.cpp screen.cpp tower.cpp menu.cpp shadows.cpp table.cpp -lGL -lGLU -lglut $(LDFLAGS)
 
 clean:

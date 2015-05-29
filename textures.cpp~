@@ -1,7 +1,5 @@
-//#include "computer.h"
+#include "computer.h"
 #include "textures.h"
-
-using namespace std;
 
 unsigned int texture[NUM_TEX];
 
@@ -61,6 +59,7 @@ void loadExternalTextures()
    image[5] = getBMPData("textures/tower-body.bmp");
    image[6] = getBMPData("textures/screen-front.bmp");
    image[7] = getBMPData("textures/table.bmp");
+   image[8] = getBMPData("textures/pad.bmp");
 
    // Teclado - teclas
    glGenTextures(1, &texture[0]);
@@ -141,4 +140,14 @@ void loadExternalTextures()
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[7]->sizeX, image[7]->sizeY, 0, 
 	            GL_RGB, GL_UNSIGNED_BYTE, image[7]->data);
+	            
+	// pad
+   glGenTextures(1, &texture[8]);
+   glBindTexture(GL_TEXTURE_2D, texture[8]);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image[8]->sizeX, image[8]sizeY, 0, 
+	            GL_RGB, GL_UNSIGNED_BYTE, image[8]->data);
 }
