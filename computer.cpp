@@ -33,6 +33,8 @@ GLfloat LightDiffuse2[] = { 0.0f, 0.0f, 0.0f, 0.0f };
 /* position of light (x, y, z, (position of light)) */
 GLfloat LightPosition[] = { 0.0f, 1.0f, 10.0, 1.0f };
 
+double move_x = 0;
+double move_y = 0;
 double rotate_y = 0; 
 double rotate_x = 0;
 double zoom = 1;
@@ -48,10 +50,10 @@ void display()
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);
 	glScalef(zoom, zoom, zoom);	
 	
+	// translacao que move o computador de local
+	glTranslatef(move_x, move_y, 0.0f);
 	if(light)
 		displayShadows();
-	
-	
 	displayKeyboard();
 	// correcao da posicao do rato
 	glPushMatrix();
@@ -61,7 +63,6 @@ void display()
 	drawTable();
 	displayTower();
 	displayScreen();
-	
 	glutSwapBuffers();
 }
 
@@ -125,7 +126,16 @@ void keyInput(unsigned char key, int x, int y)
 			glDisable(GL_LIGHT1);
 	    	glEnable(GL_LIGHT2);
 		}
-	}
+	} 
+	else if (key == 'w')
+		move_y += 0.2;
+	else if (key == 's')
+		move_y -= 0.2;
+	else if (key == 'a')
+		move_x -= 0.2;
+	else if (key == 'd')
+		move_x += 0.2;	
+		
 	glutPostRedisplay();
 }
 
