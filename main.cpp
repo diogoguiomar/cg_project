@@ -1,4 +1,4 @@
-#include "computer.h"
+#include "main.h"
 #include "textures.h"
 #include "keyboard.h"
 #include "mouse.h"
@@ -60,6 +60,7 @@ void display()
 	glTranslatef(-1.0f, 0.0f, 0.0f);
 	displayMouse();
 	glPopMatrix();
+	
 	drawTable();
 	displayTower();
 	displayScreen();
@@ -86,6 +87,7 @@ void animation()
 	rotate(initial_y);
 }
 
+/* animacao com rato */ 
 void mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON)
@@ -95,6 +97,7 @@ void mouse(int button, int state, int x, int y)
 	}
 }
 
+/* rotação utilizando as setas */
 void specialKeyInput(int key, int x, int y) 
 {
 	if (key == GLUT_KEY_RIGHT)
@@ -111,12 +114,14 @@ void specialKeyInput(int key, int x, int y)
 
 void keyInput(unsigned char key, int x, int y) 
 {
+	/* zoom */
 	if (key == '+')
 		zoom += 0.05;
     else if (key == '-' && zoom > 0)
     	zoom -= 0.05;
     else if (key == ESC)
     	exit(0);
+    /* ligar/desligar luzes */
 	else if (key == 'l') {
 		light = light ? 0 : 1;
 		if (light) {
@@ -127,6 +132,7 @@ void keyInput(unsigned char key, int x, int y)
 	    	glEnable(GL_LIGHT2);
 		}
 	} 
+	/* movimento horizontal e vertical */
 	else if (key == 'w')
 		move_y += 0.2;
 	else if (key == 's')

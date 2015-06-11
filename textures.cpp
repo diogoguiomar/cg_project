@@ -1,4 +1,4 @@
-#include "computer.h"
+#include "main.h"
 #include "textures.h"
 
 unsigned int texture[NUM_TEX];
@@ -50,6 +50,7 @@ void loadExternalTextures()
    // Local storage for bmp image data.
    BitMapFile *image[NUM_TEX];
 
+	/* array de texturas a aplicar nos objetos */
    // Load the textures.
    image[0] = getBMPData("textures/teclado01.bmp");
    image[1] = getBMPData("textures/teclado02.bmp");

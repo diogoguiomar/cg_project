@@ -1,4 +1,4 @@
-#include "computer.h"
+#include "main.h"
 
 void displayKeyboard()
 {

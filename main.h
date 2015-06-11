@@ -1,5 +1,5 @@
-#ifndef COMPUTER_H
-#define COMPUTER_H
+#ifndef MAIN_H
+#define MAIN_H
 
 using namespace std;
 

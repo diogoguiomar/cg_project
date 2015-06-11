@@ -1,6 +1,6 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
-#include "computer.h"
+#include "main.h"
 #include "screen.h"
 
 void displayScreen ()

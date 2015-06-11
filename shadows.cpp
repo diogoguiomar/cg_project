@@ -1,4 +1,4 @@
-#include "computer.h"
+#include "main.h"
 #include "shadows.h"
 
 void displayShadows ()

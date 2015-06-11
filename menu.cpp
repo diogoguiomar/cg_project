@@ -1,4 +1,4 @@
-#include "computer.h"
+#include "main.h"
 #include "menu.h"
 
 void mainMenu(int option)
@@ -37,6 +37,7 @@ void polygonModeMenu(int option)
 	glutPostRedisplay();
 }
 
+/* interacao a partir do botao direito do rato */ 
 void createMenu()
 {
 	int polygonMenuHandle, viewMenuHandle;
