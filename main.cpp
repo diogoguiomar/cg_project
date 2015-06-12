@@ -7,6 +7,7 @@
 #include "shadows.h"
 #include "table.h"
 #include "menu.h"
+#include "wires.h"
 
 #ifdef __APPLE__
 #  include <GLUT/glut.h>
@@ -64,6 +65,7 @@ void display()
 	drawTable();
 	displayTower();
 	displayScreen();
+	displayWire();
 	glutSwapBuffers();
 }
 
